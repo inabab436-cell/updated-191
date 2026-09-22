@@ -212,9 +212,6 @@ function ChatPreview({ slug }: { slug: string }) {
             </span>
             معاينة دردشة العملاء
           </h2>
-          <p className="mt-1 text-xs text-muted-foreground">
-            نفس الدردشة التي يراها العميل، ومتّصلة بالوكيل مباشرة.
-          </p>
         </div>
         <Button size="sm" variant="outline" asChild>
           <a href={`/chat/${slug}?mode=new`} target="_blank" rel="noopener noreferrer">
