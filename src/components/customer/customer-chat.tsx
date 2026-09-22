@@ -203,7 +203,7 @@ export function CustomerChat({
   // Initialize conversation. `mode=new` opens a NEW conversation for the
   // SAME visitor — it never rotates the visitor id.
   useEffect(() => {
-    if (!callEdge || !merchantId || !loggedIn) return;
+    if (!callEdge || !merchantId || !visitorId || !loggedIn) return;
     let cancelled = false;
     (async () => {
       try {
