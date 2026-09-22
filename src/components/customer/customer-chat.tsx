@@ -173,7 +173,7 @@ export function CustomerChat({
   const chatAiUrl = config.data?.chatAiUrl ?? null;
   const anonKey = config.data?.supabaseAnonKey ?? null;
 
-  const session = useCustomerSession({ merchantId, visitorId });
+  const session = useCustomerSession({ merchantId, visitorId, enabled: !ownerPreview });
   const loggedIn = ownerPreview || !!session.data?.loggedIn;
   const customerEmail = session.data?.email ?? null;
 
@@ -440,18 +440,20 @@ export function CustomerChat({
             </div>
           </div>
           <div className="flex shrink-0 items-center gap-1">
-            {loggedIn && (
+            {loggedIn && !ownerPreview && (
               <Button asChild variant="ghost" size="icon" className="rounded-full" title="حسابي">
                 <Link to="/c/$slug/account" params={{ slug }}>
                   <UserCircle2 className="h-[18px] w-[18px]" />
                 </Link>
               </Button>
             )}
-            <Button asChild variant="ghost" size="icon" className="rounded-full" title="العودة للمتجر">
-              <Link to="/c/$slug" params={{ slug }}>
-                <ArrowRight className="h-[18px] w-[18px]" />
-              </Link>
-            </Button>
+            {!embedded && (
+              <Button asChild variant="ghost" size="icon" className="rounded-full" title="العودة للمتجر">
+                <Link to="/c/$slug" params={{ slug }}>
+                  <ArrowRight className="h-[18px] w-[18px]" />
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </header>

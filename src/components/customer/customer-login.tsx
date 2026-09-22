@@ -20,18 +20,22 @@ import { OPEN_ACCESS } from "@/lib/open-access";
 export function useCustomerSession(opts?: {
   merchantId?: string | null;
   visitorId?: string | null;
+  enabled?: boolean;
 }) {
   const fn = useServerFn(getCustomerSession);
   const ensureGuest = useServerFn(ensureGuestCustomerSession);
+  const enabled = opts?.enabled ?? true;
   const query = useQuery<CustomerSessionInfo>({
     queryKey: ["customer-session"],
     queryFn: () => fn(),
+    enabled,
     staleTime: 30_000,
   });
 
   const tried = useRef(false);
   const merchantId = opts?.merchantId ?? null;
   useEffect(() => {
+    if (!enabled) return;
     if (!OPEN_ACCESS || tried.current) return;
     if (!merchantId || query.isLoading || query.data?.loggedIn) return;
     tried.current = true;
@@ -40,7 +44,7 @@ export function useCustomerSession(opts?: {
     })
       .then(() => query.refetch())
       .catch(() => undefined);
-  }, [merchantId, opts?.visitorId, query.isLoading, query.data?.loggedIn]);
+  }, [enabled, merchantId, opts?.visitorId, query.isLoading, query.data?.loggedIn]);
 
   return query;
 }
