@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import {
   Globe, Plus, Trash2, Pencil, Upload, X,
   Copy, ExternalLink, Save, Info, ShoppingBag, ScrollText, Truck, PhoneCall, Sparkles, Loader2,
+  MessageSquare,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
