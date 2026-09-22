@@ -88,8 +88,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "كيوباي — وكيل ذكاء اصطناعي يردّ على عملائك" },
       { name: "twitter:description", content: "كيوباي منصة ذكاء اصطناعي متكاملة تُدير محادثات عملائك وتردّ عليهم بكفاءة على مدار الساعة." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4365f1c0-9160-4eb5-b3d1-c94a25015ffe/id-preview-59cdd433--3b73e95f-a7c2-4536-a0a4-ce421a37121e.lovable.app-1783384006657.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4365f1c0-9160-4eb5-b3d1-c94a25015ffe/id-preview-59cdd433--3b73e95f-a7c2-4536-a0a4-ce421a37121e.lovable.app-1783384006657.png" },
     ],
     links: [
       {

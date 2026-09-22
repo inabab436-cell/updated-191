@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import {
   Globe, Plus, Trash2, Pencil, Upload, X,
   Copy, ExternalLink, Save, Info, ShoppingBag, ScrollText, Truck, PhoneCall, Sparkles, Loader2,
+  MessageSquare,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { IdentitySection } from "@/components/website/identity-section";
+import { CustomerChat } from "@/components/customer/customer-chat";
 import { PageShell, PageHero, SurfaceCard } from "@/components/layout/page-shell";
 
 import {
@@ -31,7 +33,16 @@ import {
 } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/published")({
-  head: () => ({ meta: [{ title: "Website Management · cupai" }] }),
+  head: () => ({
+    meta: [
+      { title: "Website Management · cupai" },
+      { name: "description", content: "Manage and preview the cupai storefront and connected AI customer chat." },
+      { property: "og:title", content: "Website Management · cupai" },
+      { property: "og:description", content: "Manage and preview the cupai storefront and connected AI customer chat." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: PublishedPage,
 });
 
@@ -180,11 +191,39 @@ function ManagementBoard({ state }: { state: SiteState }) {
         </div>
       </SurfaceCard>
 
+      {state.brand_slug && <ChatPreview slug={state.brand_slug} />}
+
       {/* Products are managed from the Inventory page (/products), not here. */}
       <PoliciesSection />
       <ShippingSection />
       <ContactsSection />
     </div>
+  );
+}
+
+function ChatPreview({ slug }: { slug: string }) {
+  return (
+    <SurfaceCard className="overflow-hidden">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-3">
+        <div className="min-w-0">
+          <h2 className="flex items-center gap-2 text-base font-semibold">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-glow">
+              <MessageSquare className="h-4 w-4" />
+            </span>
+            معاينة دردشة العملاء
+          </h2>
+        </div>
+        <Button size="sm" variant="outline" asChild>
+          <a href={`/chat/${slug}?mode=new`} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="mr-1 h-3.5 w-3.5" />
+            فتح كامل
+          </a>
+        </Button>
+      </header>
+      <div className="h-[680px] bg-background sm:h-[760px]">
+        <CustomerChat slug={slug} mode="new" ownerPreview embedded />
+      </div>
+    </SurfaceCard>
   );
 }
 
