@@ -7,6 +7,16 @@ import { getSessionInfo, logout } from "@/lib/auth.functions";
 import logoAsset from "@/assets/cupai-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "كيوباي — وكيل ذكي لخدمة عملائك" },
+      { name: "description", content: "كيوباي يدير محادثات العملاء ويرد عليهم تلقائيًا بأسلوب علامتك التجارية." },
+      { property: "og:title", content: "كيوباي — وكيل ذكي لخدمة عملائك" },
+      { property: "og:description", content: "كيوباي يدير محادثات العملاء ويرد عليهم تلقائيًا بأسلوب علامتك التجارية." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
