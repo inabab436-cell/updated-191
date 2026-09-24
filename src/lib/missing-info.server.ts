@@ -226,6 +226,23 @@ export async function recordMissingInformation(
     } catch (e) {
       console.error("[missing-info] email notify skipped", e);
     }
+    try {
+      const { notifyMerchantByPush, missingInfoPush } = await import(
+        "@/lib/push-notify.server"
+      );
+      const push = missingInfoPush(question, product);
+      await notifyMerchantByPush({
+        admin: supabase as any,
+        merchantId: input.merchantId,
+        event: "missing_information",
+        title: push.title,
+        body: push.body,
+        path: "/missing-info",
+      });
+    } catch (e) {
+      console.error("[missing-info] push notify skipped", e);
+    }
+
 
   } else {
     // NEVER a second notification. A brand-new asker re-alerts the same row.
