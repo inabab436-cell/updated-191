@@ -127,6 +127,8 @@ function NotificationSettingsPage() {
           </div>
         </section>
 
+        <PushSection />
+
         <section className="flex items-center gap-2 rounded-2xl border border-primary/20 bg-primary/5 p-4 text-sm text-primary">
           <MailCheck className="h-4 w-4 shrink-0" />
           <p>

@@ -11,3 +11,4 @@
 - [x] Redesign the public waitlist page with a calm, smart, orderly visual direction and CUPAI naming
 - [x] Align the waitlist page with the main CUPAI design and add a live three-day launch countdown
 - [x] Add the complete customer chat to the brand owner's website preview, connected to the same agent
+- [x] Browser/device push notifications (Firebase Cloud Messaging) for new orders, missing info, and human handoff
