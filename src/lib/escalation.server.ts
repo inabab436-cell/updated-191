@@ -124,7 +124,24 @@ export async function recordEscalation(
     } else if (notifErr) {
       console.error("[escalation] notification failed", notifErr.message);
     }
+    try {
+      const { notifyMerchantByPush, humanNeededPush } = await import(
+        "@/lib/push-notify.server"
+      );
+      const push = humanNeededPush(reason);
+      await notifyMerchantByPush({
+        admin: admin as any,
+        conversationId: input.conversationId,
+        event: "human_needed",
+        title: push.title,
+        body: push.body,
+        path: `/conversation/${input.conversationId}`,
+      });
+    } catch (e) {
+      console.error("[escalation] push notify skipped", e);
+    }
   }
+
 
   return { ok: true, category, severity, alreadyOpen };
 }

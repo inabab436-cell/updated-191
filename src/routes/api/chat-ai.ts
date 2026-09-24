@@ -3718,6 +3718,24 @@ export const Route = createFileRoute("/api/chat-ai")({
                 console.error("[chat-ai] order email notify skipped", e);
               }
             }
+            if (!latestConversationOrder && merchant_id) {
+              try {
+                const { notifyMerchantByPush, orderPush } = await import(
+                  "@/lib/push-notify.server"
+                );
+                const push = orderPush(orderNumber);
+                await notifyMerchantByPush({
+                  admin: supabase as any,
+                  merchantId: merchant_id,
+                  event: "new_order",
+                  title: push.title,
+                  body: push.body,
+                  path: "/orders",
+                });
+              } catch (e) {
+                console.error("[chat-ai] order push notify skipped", e);
+              }
+            }
 
 
             if (customer?.id && !latestConversationOrder) {
