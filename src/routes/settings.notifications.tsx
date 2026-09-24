@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bell, ArrowLeft, Loader2, MailCheck } from "lucide-react";
+import { Bell, ArrowLeft, Loader2, MailCheck, BellRing, Smartphone } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,14 @@ import {
   updateEmailNotificationSettings,
   type EmailNotificationSettings,
 } from "@/lib/email-notifications.functions";
+import {
+  getPushSettings,
+  updatePushSettings,
+  registerPushToken,
+  unregisterPushTokens,
+  type PushSettings,
+} from "@/lib/push.functions";
+import { enablePush } from "@/lib/push-client";
 
 export const Route = createFileRoute("/settings/notifications")({
   head: () => ({
